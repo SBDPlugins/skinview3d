@@ -1,6 +1,5 @@
 import { inferModelType, isTextureSource, loadCapeToCanvas, loadImage, loadSkinToCanvas, ModelType, RemoteImage, TextureSource } from "skinview-utils";
 import { NearestFilter, PerspectiveCamera, Scene, Texture, Vector2, WebGLRenderer } from "three";
-import { RootAnimation } from "./animation.js";
 import { BackEquipment, PlayerObject } from "./model.js";
 
 export interface LoadOptions {
@@ -55,7 +54,6 @@ export class SkinViewer {
 	readonly camera: PerspectiveCamera;
 	readonly renderer: WebGLRenderer;
 	readonly playerObject: PlayerObject;
-	readonly animations: RootAnimation = new RootAnimation();
 
 	readonly skinCanvas: HTMLCanvasElement;
 	readonly capeCanvas: HTMLCanvasElement;
@@ -182,7 +180,6 @@ export class SkinViewer {
 		if (this.disposed || this._renderPaused) {
 			return;
 		}
-		this.animations.runAnimationLoop(this.playerObject);
 		this.render();
 		window.requestAnimationFrame(() => this.draw());
 	}
